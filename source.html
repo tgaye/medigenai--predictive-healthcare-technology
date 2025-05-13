@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediGenAI | Predictive Healthcare Technology</title>
+    <link rel="icon" type="image/png" href="http://localhost:3001/output_images/man2r5gu-dp8la8l0/favicon-medical-ai-icon_32x32.png">
+    <style>
+        :root {
+            --clinical-navy: #002366;
+            --biotech-teal: #00D1D1;
+            --ai-purple: #7E4BEC;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #f1f5f9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Neuzeit Grotesk', 'Helvetica Neue', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            background: linear-gradient(135deg, var(--clinical-navy) 0%, #001a4d 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+            background-color: rgba(0, 35, 102, 0.7);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--biotech-teal), var(--ai-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .hero-cta {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(to right, var(--ai-purple), var(--biotech-teal));
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Neural Network Animation */
+        #neural-network {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.7;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            color: var(--clinical-navy);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--biotech-teal), var(--ai-purple));
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        
+        /* Technology Section */
+        .tech-process {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        
+        .process-step {
+            text-align: center;
+            width: 22%;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .process-step.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--ai-purple), var(--biotech-teal));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 20px rgba(126, 75, 236, 0.3);
+        }
+        
+        .step-connector {
+            position: absolute;
+            top: 40px;
+            right: -30%;
+            width: 30%;
+            height: 2px;
+            background: linear-gradient(to right, var(--biotech-teal), var(--ai-purple));
+            z-index: -1;
+        }
+        
+        /* Accuracy Meter */
+        .accuracy-meter {
+            width: 100%;
+            max-width: 800px;
+            margin: 60px auto;
+            background-color: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .accuracy-meter.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .meter-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .meter-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--ai-purple);
+        }
+        
+        .meter-bar {
+            height: 20px;
+            background-color: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .meter-progress {
+            height: 100%;
+            width: 87%;
+            background: linear-gradient(to right, var(--biotech-teal), var(--ai-purple));
+            border-radius: 10px;
+            transition: width 1.5s ease-out;
+        }
+        
+        /* FDA Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 60px auto 0;
+            padding: 40px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--biotech-teal), var(--ai-purple));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-date {
+            font-weight: 600;
+            color: var(--ai-purple);
+            margin-bottom: 10px;
+        }
+        
+        /* Partners Grid */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .partner-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .partner-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .partner-logo {
+            height: 80px;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+        
+        /* Team Section */
+        .team-container {
+            display: flex;
+            margin-top: 60px;
+        }
+        
+        .team-column {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .team-member {
+            margin-bottom: 30px;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-photo {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .team-info {
+            padding: 20px;
+        }
+        
+        /* Funding Section */
+        .funding-container {
+            background: linear-gradient(135deg, var(--clinical-navy) 0%, #001a4d 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 60px;
+            margin-top: 60px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .funding-counter {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--biotech-teal);
+            margin-bottom: 20px;
+        }
+        
+        .funding-chart {
+            flex: 1;
+            min-width: 300px;
+            height: 300px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin-left: 40px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--clinical-navy);
+            color: white;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .footer-link {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--biotech-teal);
+        }
+        
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tech-process {
+                flex-direction: column;
+            }
+            
+            .process-step {
+                width: 100%;
+                margin-bottom: 40px;
+            }
+            
+            .step-connector {
+                display: none;
+            }
+            
+            .timeline::before {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .team-container {
+                flex-direction: column;
+            }
+            
+            .funding-container {
+                flex-direction: column;
+            }
+            
+            .funding-chart {
+                margin-left: 0;
+                margin-top: 40px;
+            }
+        }
+    </style>
+
+<base target="_self">
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <canvas id="neural-network"></canvas>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Redefining Healthcare Outcomes with AI Precision</h1>
+                <p>$45M Series A to Scale Predictive Medicine Globally</p>
+                <a href="#investor-contact" class="hero-cta">Join Our Investor Briefing</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology" class="container">
+        <h2 class="section-title">Our Predictive Technology</h2>
+        
+        <div class="tech-process">
+            <div class="process-step">
+                <div class="step-icon">1</div>
+                <h3>Patient Data</h3>
+                <p>Secure ingestion of EHR, genomic, and real-time monitoring data</p>
+                <div class="step-connector"></div>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-icon">2</div>
+                <h3>Neural Analysis</h3>
+                <p>Proprietary deep learning models identify complex patterns</p>
+                <div class="step-connector"></div>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-icon">3</div>
+                <h3>Risk Stratification</h3>
+                <p>Multi-dimensional assessment of health trajectories</p>
+                <div class="step-connector"></div>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-icon">4</div>
+                <h3>Clinical Output</h3>
+                <p>Actionable predictions with confidence intervals</p>
+            </div>
+        </div>
+        
+        <div class="accuracy-meter">
+            <div class="meter-header">
+                <h3>Prediction Accuracy</h3>
+                <div class="meter-value pulse">87%</div>
+            </div>
+            <div class="meter-bar">
+                <div class="meter-progress"></div>
+            </div>
+            <p>Validated across 12,000+ patient cases, outperforming traditional methods by 40%</p>
+        </div>
+    </section>
+
+    <!-- FDA Approval Section -->
+    <section id="fda" style="background-color: #f1f5f9;">
+        <div class="container">
+            <h2 class="section-title">Regulatory Pathway</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Q3 2024</div>
+                        <h3>Phase 1 Trials Begin</h3>
+                        <p>Initial clinical validation at 5 partner hospitals</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Q1 2025</div>
+                        <h3>Breakthrough Device Designation</h3>
+                        <p>Expedited FDA review pathway initiated</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Q3 2025</div>
+                        <h3>Phase 3 Trials Complete</h3>
+                        <p>Multi-center study across 25 hospitals</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Q1 2026</div>
+                        <h3>FDA Approval</h3>
+                        <p>Commercial deployment begins</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="container">
+        <h2 class="section-title">Clinical Validation</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">Leading healthcare institutions are already seeing transformative results with our predictive technology</p>
+        
+        <div class="partners-grid">
+            <div class="partner-card">
+                <img src="http://localhost:3001/output_images/man2r5gu-dp8la8l0/hospital-logo-partner-1_200x80.png" alt="Hospital Partner" class="partner-logo">
+                <h4>Mass General</h4>
+                <p>30% reduction in cardiac readmissions</p>
+            </div>
+            
+            <div class="partner-card">
+                <img src="http://localhost:3001/output_images/man2r5gu-dp8la8l0/hospital-logo-partner-2_200x80.png" alt="Hospital Partner" class="partner-logo">
+                <h4>Johns Hopkins</h4>
+                <p>28% earlier sepsis detection</p>
+            </div>
+            
+            <div class="partner-card">
+                <img src="http://localhost:3001/output_images/man2r5gu-dp8la8l0/hospital-logo-partner-3_200x80.png" alt="Hospital Partner" class="partner-logo">
+                <h4>Mayo Clinic</h4>
+                <p>22% cost savings in oncology</p>
+            </div>
+            
+            <div class="partner-card">
+                <img src="http://localhost:3001/output_images/man2r5gu-dp8la8l0/hospital-logo-partner-4_200x80.png" alt="Hospital Partner" class="partner-logo">
+                <h4>Cleveland Clinic</h4>
+                <p>35% improved discharge planning</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" style="background-color: #f1f5f9;">
+        <div class="container">
+            <h2 class="section-title">Founding Team</h2>
+            
+            <div class="team-container">
+                <div class="team-column">
+                    <div class="team-member">
+                        <img src="http://localhost:3001/output_images/man2r5gu-dp8la8l0/doctor-portrait-1_400x300.png" alt="Dr. Sarah Chen" class="team-photo">
+                        <div class="team-info">
+                            <h3>Dr. Sarah Chen, MD</h3>
+                            <p>Chief Medical Officer</p>
+                            <p>Former Johns Hopkins Chief of Cardiology</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="http://localhost:3001/output_images/man2r5gu-dp8la8l0/doctor-portrait-2_400x300.png" alt="Dr. Michael Rodriguez" class="team-photo">
+                        <div class="team-info">
+                            <h3>Dr. Michael Rodriguez, PhD</h3>
+                            <p>Head of Clinical Research</p>
+                            <p>MIT Computational Biology</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-column">
+                    <div class="team-member">
+                        <img src="http://localhost:3001/output_images/man2r5gu-dp8la8l0/ai-researcher-1_400x300.png" alt="Dr. Priya Patel" class="team-photo">
+                        <div class="team-info">
+                            <h3>Dr. Priya Patel, PhD</h3>
+                            <p>Chief AI Scientist</p>
+                            <p>DeepMind Alumni</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="http://localhost:3001/output_images/man2r5gu-dp8la8l0/ai-researcher-2_400x300.png" alt="James Wilson" class="team-photo">
+                        <div class="team-info">
+                            <h3>James Wilson</h3>
+                            <p>Chief Technology Officer</p>
+                            <p>Former Google Health Engineering Lead</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 40px; font-size: 1.2rem; font-weight: 600;">
+                Founded by Johns Hopkins Surgeons &amp; MIT AI Researchers
+            </p>
+        </div>
+    </section>
+
+    <!-- Funding Section -->
+    <section id="funding" class="container">
+        <h2 class="section-title">Investment Opportunity</h2>
+        
+        <div class="funding-container">
+            <div>
+                <div class="funding-counter">$45M</div>
+                <h3 style="margin-bottom: 20px;">Series A Funding</h3>
+                <p style="max-width: 500px; margin-bottom: 30px;">Join our mission to transform healthcare with predictive AI. Current round led by Sequoia with participation from Andreessen Horowitz.</p>
+                
+                <div style="display: flex; gap: 20px;">
+                    <a href="#investor-contact" class="hero-cta" style="margin: 0;">Download Investor Deck</a>
+                    <a href="#investor-contact" class="hero-cta" style="margin: 0; background: white; color: var(--clinical-navy);">Schedule 1:1</a>
+                </div>
+            </div>
+            
+            <div class="funding-chart">
+                <!-- Chart will be rendered here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Investor Contact -->
+    <section id="investor-contact" class="container" style="padding-bottom: 60px;">
+        <h2 class="section-title">Connect With Our Team</h2>
+        
+        <div style="max-width: 600px; margin: 0 auto; background-color: white; border-radius: 16px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);">
+            <form id="investor-form">
+                <div style="margin-bottom: 20px;">
+                    <label for="name" style="display: block; margin-bottom: 8px; font-weight: 600;">Name</label>
+                    <input type="text" id="name" style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="email" style="display: block; margin-bottom: 8px; font-weight: 600;">Email</label>
+                    <input type="email" id="email" style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="firm" style="display: block; margin-bottom: 8px; font-weight: 600;">Firm/Organization</label>
+                    <input type="text" id="firm" style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                </div>
+                
+                <div style="margin-bottom: 30px;">
+                    <label for="interest" style="display: block; margin-bottom: 8px; font-weight: 600;">Interest</label>
+                    <select id="interest" style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                        <option value="">Select an option</option>
+                        <option value="investor">Investor</option>
+                        <option value="partner">Hospital Partner</option>
+                        <option value="media">Media</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="hero-cta" style="width: 100%; border: none; cursor: pointer;">Request Information</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#technology" class="footer-link">Technology</a>
+                <a href="#fda" class="footer-link">Regulatory</a>
+                <a href="#partners" class="footer-link">Partners</a>
+                <a href="#team" class="footer-link">Team</a>
+                <a href="#funding" class="footer-link">Investors</a>
+            </div>
+            
+            <p style="margin-bottom: 30px;">
+                <img src="http://localhost:3001/output_images/man2r5gu-dp8la8l0/medigenai-logo-white_200x50.png" alt="MediGenAI" style="height: 40px;">
+            </p>
+            
+            <p class="copyright">© 2025 MediGenAI Technologies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script>
+        // Neural Network Animation
+        const neuralNetwork = document.getElementById('neural-network');
+        let scene, camera, renderer, particles, particleSystem;
+        
+        function initNeuralNetwork() {
+            // Scene setup
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 30;
+            
+            // Renderer
+            renderer = new THREE.WebGLRenderer({
+                canvas: neuralNetwork,
+                alpha: true,
+                antialias: true
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            
+            // Create particles
+            const particleCount = 500;
+            const particleGeometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+            
+            for (let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
+                positions[i3] = (Math.random() - 0.5) * 100;
+                positions[i3 + 1] = (Math.random() - 0.5) * 100;
+                positions[i3 + 2] = (Math.random() - 0.5) * 100;
+                
+                colors[i3] = 0.5 + Math.random() * 0.5;
+                colors[i3 + 1] = 0.7 + Math.random() * 0.3;
+                colors[i3 + 2] = 1.0;
+            }
+            
+            particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            
+            const particleMaterial = new THREE.PointsMaterial({
+                size: 1.5,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending
+            });
+            
+            particleSystem = new THREE.Points(particleGeometry, particleMaterial);
+            scene.add(particleSystem);
+            
+            // Animation loop
+            animate();
+            
+            // Handle resize
+            window.addEventListener('resize', onWindowResize);
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            if (particleSystem) {
+                particleSystem.rotation.x += 0.001;
+                particleSystem.rotation.y += 0.002;
+                
+                const positions = particleSystem.geometry.attributes.position.array;
+                for (let i = 0; i < positions.length; i += 3) {
+                    positions[i + 1] += Math.sin(Date.now() * 0.001 + i) * 0.01;
+                }
+                particleSystem.geometry.attributes.position.needsUpdate = true;
+            }
+            
+            renderer.render(scene, camera);
+        }
+        
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        // Initialize animation
+        initNeuralNetwork();
+        
+        // Scroll animations
+        function checkVisibility() {
+            const elements = document.querySelectorAll('.process-step, .accuracy-meter, .timeline-item');
+            
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight * 0.8;
+                
+                if (isVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkVisibility);
+        window.addEventListener('load', checkVisibility);
+        
+        // Funding counter animation
+        function animateCounter() {
+            const counter = document.querySelector('.funding-counter');
+            if (!counter) return;
+            
+            const target = 45;
+            let current = 0;
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    counter.textContent = '$' + Math.round(current) + 'M';
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = '$' + target + 'M';
+                }
+            };
+            
+            updateCounter();
+        }
+        
+        // Initialize when funding section is visible
+        const fundingObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                animateCounter();
+                fundingObserver.disconnect();
+            }
+        }, { threshold: 0.5 });
+        
+        const fundingSection = document.querySelector('#funding');
+        if (fundingSection) {
+            fundingObserver.observe(fundingSection);
+        }
+        
+        // Form submission
+        const investorForm = document.getElementById('investor-form');
+        if (investorForm) {
+            investorForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for your interest! Our team will contact you shortly.');
+                investorForm.reset();
+            });
+        }
+    </script>
+
+              
+          
+                
+          
+              
